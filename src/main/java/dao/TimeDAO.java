@@ -1,4 +1,6 @@
 package dao;
 
-public interface TimeDAO {
+import modelo.Time;
+
+public interface TimeDAO extends DaoGenerico<Time,Long>{
 }
