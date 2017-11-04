@@ -1,21 +1,8 @@
 package modelo;
 
+import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import util.Util;
 
 @Entity
 @Table(name = "TIME")
@@ -39,7 +26,7 @@ public class Time {
         this.liga = liga;
     }
 
-    // ********* Métodos do Tipo Get *********
+    // ********* Mï¿½todos do Tipo Get *********
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQUENCIA_TIME")
@@ -70,14 +57,14 @@ public class Time {
         this.liga = liga;
     }
 
-    // ********* Métodos para Associações *********
+    // ********* Mï¿½todos para Associaï¿½ï¿½es *********
 
     /*
-     * Com o atributo mappedBy. Sem ele a  JPA irá procurar  pela
+     * Com o atributo mappedBy. Sem ele a  JPA irï¿½ procurar  pela
      * tabela PRODUTO_LANCE. Com ele, ao se  tentar recuperar  um
      * produto  e  todos  os  seus  membros, o  join de PRODUTO  e
-     * LANCE irá acontecer através da chave estrangeira existente
-     * em  LANCE.  Sem  ele  a  JPA  irá  procurar  pela   tabela
+     * LANCE irï¿½ acontecer atravï¿½s da chave estrangeira existente
+     * em  LANCE.  Sem  ele  a  JPA  irï¿½  procurar  pela   tabela
      * PRODUTO_LANCE.
      */
     @OneToMany(mappedBy = "time")

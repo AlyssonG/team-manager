@@ -1,18 +1,13 @@
-
-
-import java.util.List;
-
+import corejava.Console;
 import excecao.TimeNaoEncontradoException;
 import modelo.Membro;
 import modelo.Time;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import servico.TimeAppService;
-import corejava.Console;
-import excecao.TimeNaoEncontradoException;
+
+import java.util.List;
 
 public class PrincipalTime {
     public static void main(String[] args) {
@@ -28,7 +23,7 @@ public class PrincipalTime {
 
         boolean continua = true;
         while (continua) {
-            System.out.println('\n' + "O que você deseja fazer?");
+            System.out.println('\n' + "O que vocï¿½ deseja fazer?");
             System.out.println('\n' + "1. Cadastrar um time");
             System.out.println("2. Alterar um time");
             System.out.println("3. Remover um time");
@@ -37,7 +32,7 @@ public class PrincipalTime {
             System.out.println("6. Sair");
 
             int opcao = Console.readInt('\n' +
-                    "Digite um número entre 1 e 6:");
+                    "Digite um nï¿½mero entre 1 e 6:");
 
             switch (opcao) {
                 case 1: {
@@ -50,15 +45,15 @@ public class PrincipalTime {
 
                     long numero = timeAppService.inclui(time);
 
-                    System.out.println('\n' + "Time número " +
-                            numero + " incluído com sucesso!");
+                    System.out.println('\n' + "Time nï¿½mero " +
+                            numero + " incluï¿½do com sucesso!");
 
                     break;
                 }
 
                 case 2: {
                     int resposta = Console.readInt('\n' +
-                            "Digite o número do time que você deseja alterar: ");
+                            "Digite o nï¿½mero do time que vocï¿½ deseja alterar: ");
 
                     try {
                         umTime = timeAppService.recuperaUmTime(resposta);
@@ -68,16 +63,16 @@ public class PrincipalTime {
                     }
 
                     System.out.println('\n' +
-                            "Número = " + umTime.getId() +
+                            "Nï¿½mero = " + umTime.getId() +
                             "    Nome = " + umTime.getNome() +
                             "    Liga = " + umTime.getLiga());
 
-                    System.out.println('\n' + "O que você deseja alterar?");
+                    System.out.println('\n' + "O que vocï¿½ deseja alterar?");
                     System.out.println('\n' + "1. Nome");
                     System.out.println("2. Liga");
 
                     int opcaoAlteracao = Console.readInt('\n' +
-                            "Digite um número de 1 a 2:");
+                            "Digite um nï¿½mero de 1 a 2:");
 
                     switch (opcaoAlteracao) {
                         case 1:
@@ -89,7 +84,7 @@ public class PrincipalTime {
                                 timeAppService.altera(umTime);
 
                                 System.out.println('\n' +
-                                        "Alteração de nome efetuada com sucesso!");
+                                        "Alteraï¿½ï¿½o de nome efetuada com sucesso!");
                             } catch (TimeNaoEncontradoException e) {
                                 System.out.println('\n' + e.getMessage());
                             }
@@ -105,7 +100,7 @@ public class PrincipalTime {
                                 timeAppService.altera(umTime);
 
                                 System.out.println('\n' +
-                                        "Alteração de descrição efetuada " +
+                                        "Alteraï¿½ï¿½o de descriï¿½ï¿½o efetuada " +
                                         "com sucesso!");
                             } catch (TimeNaoEncontradoException e) {
                                 System.out.println('\n' + e.getMessage());
@@ -114,7 +109,7 @@ public class PrincipalTime {
                             break;
 
                         default:
-                            System.out.println('\n' + "Opção inválida!");
+                            System.out.println('\n' + "Opï¿½ï¿½o invï¿½lida!");
                     }
 
                     break;
@@ -122,7 +117,7 @@ public class PrincipalTime {
 
                 case 3: {
                     int resposta = Console.readInt('\n' +
-                            "Digite o número do time que você deseja remover: ");
+                            "Digite o nï¿½mero do time que vocï¿½ deseja remover: ");
 
                     try {
                         umTime = timeAppService.recuperaUmTime(resposta);
@@ -132,12 +127,12 @@ public class PrincipalTime {
                     }
 
                     System.out.println('\n' +
-                            "Número = " + umTime.getId() +
+                            "Nï¿½mero = " + umTime.getId() +
                             "    Nome = " + umTime.getNome() +
                             "    Liga = " + umTime.getLiga());
 
                     String resp = Console.readLine('\n' +
-                            "Confirma a remoção do time?");
+                            "Confirma a remoï¿½ï¿½o do time?");
 
                     if (resp.equals("s")) {
                         try {
@@ -148,7 +143,7 @@ public class PrincipalTime {
                         }
                     } else {
                         System.out.println('\n' +
-                                "Time não removido.");
+                                "Time nï¿½o removido.");
                     }
 
                     break;
@@ -156,7 +151,7 @@ public class PrincipalTime {
 
                 case 4: {
                     long numero = Console.readInt('\n' +
-                            "Informe o número do time: ");
+                            "Informe o nï¿½mero do time: ");
                     try {
                         umTime = timeAppService.recuperaUmTimeEMembros(numero);
                     } catch (TimeNaoEncontradoException e) {
@@ -173,7 +168,7 @@ public class PrincipalTime {
 
                     for (Membro membro : membros) {
                         System.out.println('\n' +
-                                "      Membro número = " + membro.getId() +
+                                "      Membro nï¿½mero = " + membro.getId() +
                                 "  Nome = " + membro.getNome() +
                                 "  Posicao = " + membro.getPosicao() +
                                 "  Adimissao = " + membro.getDataAdimissao());
@@ -192,13 +187,13 @@ public class PrincipalTime {
                             System.out.println('\n' +
                                     "Time numero = " + time.getId() +
                                     "  Nome = " + time.getNome() +
-                                    "  Descrição = " + time.getLiga());
+                                    "  Descriï¿½ï¿½o = " + time.getLiga());
 
                             List<Membro> membros = time.getMembros();
 
                             for (Membro membro : membros) {
                                 System.out.println('\n' +
-                                        "      Membro número = " + membro.getId() +
+                                        "      Membro nï¿½mero = " + membro.getId() +
                                         "  Nome = " + membro.getNome() +
                                         "  Posicao = " + membro.getPosicao() +
                                         "  Adimissao = " + membro.getDataAdimissao());
@@ -206,7 +201,7 @@ public class PrincipalTime {
                         }
                     } else {
                         System.out.println('\n' +
-                                "Não há times cadastrados com esta descrição.");
+                                "Nï¿½o hï¿½ times cadastrados com esta descriï¿½ï¿½o.");
                     }
 
                     break;
@@ -219,7 +214,7 @@ public class PrincipalTime {
                 }
 
                 default:
-                    System.out.println('\n' + "Opção inválida!");
+                    System.out.println('\n' + "Opï¿½ï¿½o invï¿½lida!");
             }
         }
     }

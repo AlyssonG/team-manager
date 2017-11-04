@@ -1,20 +1,16 @@
-import java.util.List;
-
+import corejava.Console;
+import excecao.MembroNaoEncontradoException;
 import excecao.TimeNaoEncontradoException;
 import modelo.Membro;
 import modelo.Time;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import servico.MembroAppService;
 import servico.TimeAppService;
 import util.Util;
-import corejava.Console;
-import excecao.DataDeLanceInvalidaException;
-import excecao.MembroNaoEncontradoException;
-import excecao.ValorDeLanceInvalidoException;
+
+import java.util.List;
 
 public class PrincipalMembro {
 
