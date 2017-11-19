@@ -10,9 +10,8 @@ import net.sf.cglib.proxy.MethodProxy;
 
 import java.lang.reflect.Method;
 
-public class InterceptadorDeDAO implements MethodInterceptor 
-{
-	/* Parametros:
+public class InterceptadorDeDAO implements MethodInterceptor {
+    /* Parametros:
 	 * 
 	 * objeto - "this", o objeto "enhanced", isto �, o proxy.
 	 * 
@@ -33,32 +32,24 @@ public class InterceptadorDeDAO implements MethodInterceptor
 	 * sobre um objeto diferente do mesmo tipo.
 	 * 
 	 */
-	
-	public Object intercept (Object objeto, 
-    		                 Method metodo, 
-    		                 Object[] args, 
-                             MethodProxy metodoDoProxy) 
-    	throws Throwable 
-    {
-		// O s�mbolo ? representa um tipo desconhecido.
-        JPADaoGenerico<?,?> daoGenerico = (JPADaoGenerico<?,?>)objeto;
 
-        if(metodo.isAnnotationPresent(RecuperaLista.class))
-		{	// O m�todo buscaLista() retorna um List
-        	return daoGenerico.buscaLista(metodo, args);
-        }
-        else if(metodo.isAnnotationPresent(RecuperaConjunto.class))
-        {	// O m�todo buscaConjunto() retorna um Set
-        	return daoGenerico.buscaConjunto(metodo, args);
-        }
+    public Object intercept(Object objeto,
+                            Method metodo,
+                            Object[] args,
+                            MethodProxy metodoDoProxy)
+            throws Throwable {
+        // O s�mbolo ? representa um tipo desconhecido.
+        JPADaoGenerico<?, ?> daoGenerico = (JPADaoGenerico<?, ?>) objeto;
 
-        else if(metodo.isAnnotationPresent(RecuperaUm.class))
-        {	// O m�todo busca() retorna um Objeto (Entidade)
-        	return daoGenerico.busca(metodo, args);
-        }
-        else 
-        {  	throw new InfraestruturaException("Um m�todo n�o final deixou de ser anotado");
-        	// return metodoDoProxy.invokeSuper(objeto, args);
+        if (metodo.isAnnotationPresent(RecuperaLista.class)) {    // O m�todo buscaLista() retorna um List
+            return daoGenerico.buscaLista(metodo, args);
+        } else if (metodo.isAnnotationPresent(RecuperaConjunto.class)) {    // O m�todo buscaConjunto() retorna um Set
+            return daoGenerico.buscaConjunto(metodo, args);
+        } else if (metodo.isAnnotationPresent(RecuperaUm.class)) {    // O m�todo busca() retorna um Objeto (Entidade)
+            return daoGenerico.busca(metodo, args);
+        } else {
+            throw new InfraestruturaException("Um m�todo n�o final deixou de ser anotado");
+            // return metodoDoProxy.invokeSuper(objeto, args);
         }
     }
 }

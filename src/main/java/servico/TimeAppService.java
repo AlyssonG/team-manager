@@ -20,7 +20,7 @@ public class TimeAppService {
 
     @Transactional
     public long inclui(Time umTime) {
-        Time time = timeDAO. inclui(umTime);
+        Time time = timeDAO.inclui(umTime);
         return time.getId();
     }
 
@@ -49,8 +49,7 @@ public class TimeAppService {
         }
     }
 
-    public Time recuperaUmTime(long numero)
-            throws TimeNaoEncontradoException {
+    public Time recuperaUmTime(long numero) throws TimeNaoEncontradoException {
         try {
             return timeDAO.recuperaUmTime(numero);
         } catch (ObjetoNaoEncontradoException e) {
@@ -58,8 +57,7 @@ public class TimeAppService {
         }
     }
 
-    public Time recuperaUmTimeEMembros(long numero)
-            throws TimeNaoEncontradoException {
+    public Time recuperaUmTimeEMembros(long numero) throws TimeNaoEncontradoException {
         try {
             return timeDAO.recuperaUmTime(numero);
         } catch (ObjetoNaoEncontradoException e) {

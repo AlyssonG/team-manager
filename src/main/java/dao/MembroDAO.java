@@ -8,7 +8,7 @@ import modelo.Membro;
 
 import java.util.List;
 
-public interface MembroDAO extends DaoGenerico<Membro,Long> {
+public interface MembroDAO extends DaoGenerico<Membro, Long> {
     @RecuperaUm
     Membro recuperaUmMembro(Long id) throws ObjetoNaoEncontradoException,
             TimeNaoEncontradoException;

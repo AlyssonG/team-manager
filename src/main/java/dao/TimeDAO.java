@@ -8,7 +8,7 @@ import modelo.Time;
 
 import java.util.Set;
 
-public interface TimeDAO extends DaoGenerico<Time,Long>{
+public interface TimeDAO extends DaoGenerico<Time, Long> {
 
     @RecuperaUm
     Time recuperaUmTime(long numero) throws ObjetoNaoEncontradoException;
