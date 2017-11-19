@@ -9,6 +9,8 @@ import modelo.Membro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 public class MembroAppService {
     @Autowired
     private TimeDAO timeDAO;
@@ -33,4 +35,20 @@ public class MembroAppService {
             throw new MembroNaoEncontradoException("Membro não encontrado.");
         }
     }
+
+    public Membro recuperaUmMembro(long numero)
+            throws MembroNaoEncontradoException, TimeNaoEncontradoException {
+        try {
+            return membroDAO.recuperaUmMembro(numero);
+        } catch (ObjetoNaoEncontradoException e) {
+            throw new MembroNaoEncontradoException("Membro não encontrado");
+        } catch (TimeNaoEncontradoException e) {
+            throw new TimeNaoEncontradoException("Time nao encontrado!");
+        }
+    }
+
+    public List<Membro> recuperaMembros() {
+        return membroDAO.recuperaMembros();
+    }
+
 }

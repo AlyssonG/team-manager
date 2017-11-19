@@ -75,7 +75,8 @@ public class PrincipalMembro {
 
                     try {
                         umMembro = membroAppService.recuperaUmMembro(resposta);
-                    } catch (MembroNaoEncontradoException e) {
+                    }
+                    catch (MembroNaoEncontradoException e) {
                         System.out.println('\n' + e.getMessage());
                         break;
                     } catch (TimeNaoEncontradoException e) {
