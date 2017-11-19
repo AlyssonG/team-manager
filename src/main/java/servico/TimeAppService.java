@@ -7,6 +7,9 @@ import modelo.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Set;
+
 public class TimeAppService {
     private TimeDAO timeDAO = null;
 
@@ -45,4 +48,27 @@ public class TimeAppService {
             throw new TimeNaoEncontradoException("Time não encontrado");
         }
     }
+
+    public Time recuperaUmTime(long numero)
+            throws TimeNaoEncontradoException {
+        try {
+            return timeDAO.recuperaUmTime(numero);
+        } catch (ObjetoNaoEncontradoException e) {
+            throw new TimeNaoEncontradoException("Time não encontrado");
+        }
+    }
+
+    public Time recuperaUmTimeEMembros(long numero)
+            throws TimeNaoEncontradoException {
+        try {
+            return timeDAO.recuperaUmTime(numero);
+        } catch (ObjetoNaoEncontradoException e) {
+            throw new TimeNaoEncontradoException("Time não encontrado");
+        }
+    }
+
+    public Set<Time> recuperaTimesEMembros() {
+        return timeDAO.recuperaTimesEMembros();
+    }
+
 }

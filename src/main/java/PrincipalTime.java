@@ -8,6 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import servico.TimeAppService;
 
 import java.util.List;
+import java.util.Set;
 
 public class PrincipalTime {
     public static void main(String[] args) {
@@ -178,7 +179,7 @@ public class PrincipalTime {
                 }
 
                 case 5: {
-                    List<Time> times = timeAppService.recuperaTimesEMembros();
+                    Set<Time> times = timeAppService.recuperaTimesEMembros();
 
                     if (times.size() != 0) {
                         System.out.println("");
