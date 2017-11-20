@@ -1,4 +1,5 @@
 import corejava.Console;
+import excecao.MembroJaExistenteException;
 import excecao.MembroNaoEncontradoException;
 import excecao.TimeNaoEncontradoException;
 import modelo.Membro;
@@ -63,7 +64,7 @@ public class PrincipalMembro {
                     try {
                         membroAppService.inclui(umMembro);
                         System.out.println('\n' + "Membro adicionado com sucesso");
-                    } catch (TimeNaoEncontradoException e) {
+                    } catch (TimeNaoEncontradoException | MembroJaExistenteException e) {
                         e.printStackTrace();
                     }
                     break;

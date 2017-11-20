@@ -26,7 +26,7 @@ public class MembroAppService {
     }
 
     @Transactional
-    public long inclui(Membro umMembro) throws TimeNaoEncontradoException {
+    public long inclui(Membro umMembro) throws TimeNaoEncontradoException, MembroJaExistenteException {
         //incluir regra de membros em um só time
         //membroDAO.find(membro)
         //se não achar, inclui
