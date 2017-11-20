@@ -2,10 +2,12 @@ package servico;
 
 import dao.MembroDAO;
 import dao.TimeDAO;
+import excecao.MembroJaExistenteException;
 import excecao.MembroNaoEncontradoException;
 import excecao.ObjetoNaoEncontradoException;
 import excecao.TimeNaoEncontradoException;
 import modelo.Membro;
+import modelo.Time;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -28,6 +30,13 @@ public class MembroAppService {
         //incluir regra de membros em um só time
         //membroDAO.find(membro)
         //se não achar, inclui
+        for(Time t : timeDAO.recuperaTimesEMembros()){
+            for(Membro m : t.getMembros()){
+                if(m.getNome().equalsIgnoreCase(umMembro.getNome())){
+                    throw new MembroJaExistenteException("Membro já existente");
+                }
+            }
+        }
         Membro membro = membroDAO.inclui(umMembro);
         return membro.getId();
     }
