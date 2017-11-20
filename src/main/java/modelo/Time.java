@@ -4,6 +4,21 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQueries(
+        {	@NamedQuery
+                (	name = "Time.recuperaUmTime",
+                        query = "select t from Time t where t.id = ?1"
+                ),
+                @NamedQuery
+                        (	name = "Time.recuperaUmTimeEMembros",
+                                query = "select t from Time t left outer join fetch t.membros where t.id = ?1"
+                        ),
+                @NamedQuery
+                        (	name = "Time.recuperaTimesEMembros",
+                                query = "select t from Time t left outer join fetch t.membros"
+                        )
+        })
+
 @Entity
 @Table(name = "TIME")
 @SequenceGenerator(name = "SEQUENCIA_TIME",
