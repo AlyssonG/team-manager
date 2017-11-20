@@ -14,23 +14,23 @@
              http://www.springframework.org/schema/util/spring-util">
 
     <bean id="timeAppService" class="servico.TimeAppService">
-        <property name="timeDAO" ref="timeDAOImpl" />
+        <property name="timeDAO" ref="timeDAO" />
     </bean>
 
     <bean id="membroAppService" class="servico.MembroAppService">
-        <property name="timeDAO" ref="timeDAOImpl" />
-        <property name="membroDAO" ref="membroDAOImpl" />
+        <property name="timeDAO" ref="timeDAO" />
+        <property name="membroDAO" ref="membroDAO" />
     </bean>
 
-    <bean id="timeDAOImpl" class="dao.controle.FabricaDeDao" factory-method="getDao">
+    <bean id="timeDAO" class="dao.controle.FabricaDeDao" factory-method="getDao">
         <constructor-arg value="dao.impl.TimeDAOImpl" />
     </bean>
 
-    <bean id="membroDAOImpl" class="dao.controle.FabricaDeDao" factory-method="getDao">
+    <bean id="membroDAO" class="dao.controle.FabricaDeDao" factory-method="getDao">
         <constructor-arg value="dao.impl.MembroDAOImpl" />
     </bean>
 
-    <context:component-scan base-package="dao.impl" />
+    <context:component-scan base-package="dao" />
 
 <!-- Também  é  preciso  registrar  uma instância de PersistenceAnnotationBeanPostProcessor  
      para  que  ela  injete  um  entity  manager  diferente  nas propriedades  anotadas com 
@@ -60,7 +60,7 @@
 
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="exercicio" />
+        <property name="persistenceUnitName" value="teammanager" />
         <property name="packagesToScan" value="modelo" />
         <property name="dataSource" ref="dataSource" />
         <property name="jpaVendorAdapter">
