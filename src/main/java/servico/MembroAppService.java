@@ -27,16 +27,6 @@ public class MembroAppService {
 
     @Transactional
     public long inclui(Membro umMembro) throws TimeNaoEncontradoException, MembroJaExistenteException {
-        //incluir regra de membros em um só time
-        //membroDAO.find(membro)
-        //se não achar, inclui
-        for(Time t : timeDAO.recuperaTimesEMembros()){
-            for(Membro m : t.getMembros()){
-                if(m.getNome().equalsIgnoreCase(umMembro.getNome())){
-                    throw new MembroJaExistenteException("Membro já existente");
-                }
-            }
-        }
         Membro membro = membroDAO.inclui(umMembro);
         return membro.getId();
     }

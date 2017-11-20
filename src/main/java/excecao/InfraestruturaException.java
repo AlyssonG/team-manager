@@ -1,5 +1,8 @@
 package excecao;
 
+import anotacao.ExcecaoDeAplicacao;
+
+@ExcecaoDeAplicacao
 public class InfraestruturaException extends RuntimeException
 {	
 	private final static long serialVersionUID = 1L;
