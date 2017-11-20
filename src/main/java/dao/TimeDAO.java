@@ -1,7 +1,6 @@
 package dao;
 
 import anotacoes.RecuperaConjunto;
-import anotacoes.RecuperaLista;
 import anotacoes.RecuperaUm;
 import excecao.ObjetoNaoEncontradoException;
 import modelo.Time;
@@ -13,7 +12,7 @@ public interface TimeDAO extends DaoGenerico<Time, Long> {
     @RecuperaUm
     Time recuperaUmTime(long numero) throws ObjetoNaoEncontradoException;
 
-    @RecuperaLista
+    @RecuperaUm
     Time recuperaUmTimeEMembros(long numero) throws ObjetoNaoEncontradoException;
 
     @RecuperaConjunto
