@@ -1,8 +1,8 @@
 package dao.controle;
 
-import anotacoes.RecuperaConjunto;
-import anotacoes.RecuperaLista;
-import anotacoes.RecuperaUm;
+import anotacao.RecuperaConjunto;
+import anotacao.RecuperaLista;
+import anotacao.RecuperaUm;
 import dao.impl.JPADaoGenerico;
 import excecao.InfraestruturaException;
 import net.sf.cglib.proxy.MethodInterceptor;

@@ -1,7 +1,7 @@
 package dao;
 
-import anotacoes.RecuperaLista;
-import anotacoes.RecuperaUm;
+import anotacao.RecuperaLista;
+import anotacao.RecuperaUm;
 import excecao.ObjetoNaoEncontradoException;
 import excecao.TimeNaoEncontradoException;
 import modelo.Membro;

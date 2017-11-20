@@ -1,7 +1,7 @@
 package dao;
 
-import anotacoes.RecuperaConjunto;
-import anotacoes.RecuperaUm;
+import anotacao.RecuperaConjunto;
+import anotacao.RecuperaUm;
 import excecao.ObjetoNaoEncontradoException;
 import modelo.Time;
 
