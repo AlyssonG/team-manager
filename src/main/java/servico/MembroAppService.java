@@ -6,17 +6,22 @@ import excecao.MembroNaoEncontradoException;
 import excecao.ObjetoNaoEncontradoException;
 import excecao.TimeNaoEncontradoException;
 import modelo.Membro;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public class MembroAppService {
-    @Autowired
-    private TimeDAO timeDAO;
 
-    @Autowired
-    private MembroDAO membroDAO;
+    private TimeDAO timeDAO = null;
+    private MembroDAO membroDAO = null;
+
+    public void setTimeDAO(TimeDAO timeDAO) {
+        this.timeDAO = timeDAO;
+    }
+
+    public void setMembroDAO(MembroDAO membroDAO) {
+        this.membroDAO = membroDAO;
+    }
 
     @Transactional
     public long inclui(Membro umMembro) throws TimeNaoEncontradoException {
