@@ -3,7 +3,16 @@ package modelo;
 import javax.persistence.*;
 import java.util.Calendar;
 
-
+@NamedQueries({
+        @NamedQuery(
+                name = "Membro.recuperaUmMembro",
+                query = "select m from Membro m where m.id = ?1"
+        ),
+        @NamedQuery(
+                name = "Membro.recuperaMembros",
+                query = "select m from Membro m order by m.id desc"
+        )
+})
 
 @Entity
 @Table(name = "MEMBRO")
