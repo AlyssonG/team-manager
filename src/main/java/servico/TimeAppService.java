@@ -38,10 +38,10 @@ public class TimeAppService {
     public void exclui(Time umTime)
             throws TimeNaoEncontradoException {
         try {
-            Time time = null;//timeDAO.recuperaUmMembroETimes(umTime.getId());
+            Time time = timeDAO.recuperaUmTime(umTime.getId());
 
             if (time.getMembros().size() > 0) {
-                throw new TimeNaoEncontradoException("Este time possui lances e não pode ser removido");
+                throw new TimeNaoEncontradoException("Este time possui membros e não pode ser removido");
             }
 
             timeDAO.exclui(time);
