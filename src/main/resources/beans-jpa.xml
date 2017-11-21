@@ -11,55 +11,55 @@
              http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <bean id="timeAppService" class="servico.TimeAppService">
-        <property name="timeDAO" ref="timeDAO" />
+        <property name="timeDAO" ref="timeDAO"/>
     </bean>
 
     <bean id="membroAppService" class="servico.MembroAppService">
-        <property name="timeDAO" ref="timeDAO" />
-        <property name="membroDAO" ref="membroDAO" />
+        <property name="timeDAO" ref="timeDAO"/>
+        <property name="membroDAO" ref="membroDAO"/>
     </bean>
 
     <bean id="timeDAO" class="dao.controle.FabricaDeDao" factory-method="getDao">
-        <constructor-arg value="dao.impl.TimeDAOImpl" />
+        <constructor-arg value="dao.impl.TimeDAOImpl"/>
     </bean>
 
     <bean id="membroDAO" class="dao.controle.FabricaDeDao" factory-method="getDao">
-        <constructor-arg value="dao.impl.MembroDAOImpl" />
+        <constructor-arg value="dao.impl.MembroDAOImpl"/>
     </bean>
 
-    <context:component-scan base-package="dao" />
+    <context:component-scan base-package="dao"/>
 
-	<context:annotation-config/>
+    <context:annotation-config/>
 
-    <tx:annotation-driven />
-    
+    <tx:annotation-driven/>
+
     <bean id="transactionManager"
           class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory" />
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="teammanager" />
-        <property name="packagesToScan" value="modelo" />
-        <property name="dataSource" ref="dataSource" />
+        <property name="persistenceUnitName" value="teammanager"/>
+        <property name="packagesToScan" value="modelo"/>
+        <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="databasePlatform" value="org.hibernate.dialect.Oracle10gDialect" />
-                <property name="showSql" value="true" />
+                <property name="databasePlatform" value="org.hibernate.dialect.Oracle10gDialect"/>
+                <property name="showSql" value="true"/>
             </bean>
         </property>
     </bean>
 
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-        <property name="url" value="jdbc:oracle:thin:@localhost:49161:xe" />
-        <property name="username" value="system" />
-        <property name="password" value="oracle" />
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:49161:xe"/>
+        <property name="username" value="system"/>
+        <property name="password" value="oracle"/>
     </bean>
 
     <bean id="persistenceExceptionTranslationPostProcessor"
-          class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+          class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
 </beans>

@@ -6,6 +6,8 @@ import modelo.Membro;
 import modelo.Time;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import servico.MembroAppService;
 import servico.TimeAppService;
@@ -64,7 +66,9 @@ public class PrincipalMembro {
                     try {
                         membroAppService.inclui(umMembro);
                         System.out.println('\n' + "Membro adicionado com sucesso");
-                    } catch (TimeNaoEncontradoException | MembroJaExistenteException e) {
+                    } catch (TimeNaoEncontradoException e) {
+                        e.printStackTrace();
+                    } catch (MembroJaExistenteException e) {
                         e.printStackTrace();
                     }
                     break;
