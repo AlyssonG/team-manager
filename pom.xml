@@ -75,9 +75,9 @@
         </dependency>
 
         <dependency>
-            <groupId>aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>1.5.4</version>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+            <version>1.8.13</version>
         </dependency>
 
 
