@@ -54,7 +54,7 @@ public class AspectoAround {
                     }
                 }
                 throw new ViolacaoDeConstraintDesconhecidaException
-                        ("A operação não foi realizada em função da violação de uma restrição no banco da dados.");
+                        ("A operaï¿½ï¿½o nï¿½o foi realizada em funï¿½ï¿½o da violaï¿½ï¿½o de uma restriï¿½ï¿½o no banco da dados.");
             } else {
                 throw e;
             }

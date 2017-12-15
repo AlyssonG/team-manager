@@ -15,7 +15,7 @@ import java.io.StringWriter;
 public class AspectoParaLogDeErros {
     private static Logger logger = null;
 
-    @Pointcut("call(*servico..*.*(..))")
+    @Pointcut("call(* servico.*.*(..))")
     public void efetuaLogDeErro() {
     }
 
@@ -38,7 +38,7 @@ public class AspectoParaLogDeErros {
                 t = t.getCause();
             }
 
-            // As 4 linhas de código abaixo geram o stack trace como um String
+            // As 4 linhas de cï¿½digo abaixo geram o stack trace como um String
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             throwable.printStackTrace(pw);
