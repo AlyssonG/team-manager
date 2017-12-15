@@ -3,10 +3,7 @@ package servico;
 import anotacao.RoleAdmin;
 import dao.MembroDAO;
 import dao.TimeDAO;
-import excecao.MembroJaExistenteException;
-import excecao.MembroNaoEncontradoException;
-import excecao.ObjetoNaoEncontradoException;
-import excecao.TimeNaoEncontradoException;
+import excecao.*;
 import modelo.Membro;
 import modelo.Time;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,7 +51,7 @@ public class MembroAppService {
     }
 
     @RoleAdmin
-    public List<Membro> recuperaMembros() {
+    public List<Membro> recuperaMembros() throws ExecucaoDeMetodoSemARespectivaPermissaoException {
         return membroDAO.recuperaMembros();
     }
 

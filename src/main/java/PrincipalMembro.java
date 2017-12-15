@@ -1,5 +1,6 @@
 import Permissao.PermissaoManager;
 import corejava.Console;
+import excecao.ExecucaoDeMetodoSemARespectivaPermissaoException;
 import excecao.MembroJaExistenteException;
 import excecao.MembroNaoEncontradoException;
 import excecao.TimeNaoEncontradoException;
@@ -28,7 +29,6 @@ public class PrincipalMembro {
 
         PermissaoManager permissaoManager = PermissaoManager.getInstance();
         permissaoManager.addPermission("RoleUser1");
-        permissaoManager.addPermission("RoleAdmin");
 
         ApplicationContext fabrica = new ClassPathXmlApplicationContext("beans-jpa.xml");
 
@@ -38,6 +38,7 @@ public class PrincipalMembro {
                 (MembroAppService) fabrica.getBean("membroAppService");
 
         boolean continua = true;
+
         while (continua) {
             System.out.println('\n' + "O que você deseja fazer?");
             System.out.println('\n' + "1. Cadastrar um membro de um time");
@@ -47,106 +48,109 @@ public class PrincipalMembro {
 
             int opcao = Console.readInt('\n' +
                     "Digite um número entre 1 e 4:");
+            try {
+                switch (opcao) {
+                    case 1: {
+                        long idProduto = Console.
+                                readInt('\n' + "Informe o número do time: ");
 
-            switch (opcao) {
-                case 1: {
-                    long idProduto = Console.
-                            readInt('\n' + "Informe o número do time: ");
-
-                    try {
-                        umTime = timeAppService.recuperaUmTime(idProduto);
-                    } catch (TimeNaoEncontradoException e) {
-                        System.out.println('\n' + e.getMessage());
-                        break;
-                    }
-                    nome = Console.readLine('\n' +
-                            "Informe o nome: ");
-                    posicao = Console.readLine('\n' +
-                            "Informe a posicao: ");
-                    dataCriacao = Console.readLine(
-                            "Informe a data de admissao no time: ");
-
-                    umMembro = new Membro(nome, posicao, Util.strToCalendar(dataCriacao), umTime);
-
-                    try {
-                        membroAppService.inclui(umMembro);
-                        System.out.println('\n' + "Membro adicionado com sucesso");
-                    } catch (TimeNaoEncontradoException e) {
-                        e.printStackTrace();
-                    } catch (MembroJaExistenteException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                }
-
-                case 2: {
-                    int resposta = Console.readInt('\n' +
-                            "Digite o número do membro que você deseja remover: ");
-
-                    try {
-                        umMembro = membroAppService.recuperaUmMembro(resposta);
-                    } catch (MembroNaoEncontradoException e) {
-                        System.out.println('\n' + e.getMessage());
-                        break;
-                    } catch (TimeNaoEncontradoException e) {
-                        System.out.println('\n' + e.getMessage());
-                        break;
-                    }
-
-                    System.out.println('\n' +
-                            "Número = " + umMembro.getId() +
-                            "    Nome = " + umMembro.getNome() +
-                            "    Posição = " + umMembro.getPosicao() +
-                            "    Data de Adimissão = " + umMembro.getDataAdimissao());
-
-                    String resp = Console.readLine('\n' +
-                            "Confirma a remoção do membro?");
-
-                    if (resp.equals("s")) {
                         try {
-                            membroAppService.exclui(umMembro);
-                            System.out.println('\n' +
-                                    "Membro removido com sucesso!");
-                        } catch (MembroNaoEncontradoException e) {
-                            System.out.println(e.getMessage());
+                            umTime = timeAppService.recuperaUmTime(idProduto);
+                        } catch (TimeNaoEncontradoException e) {
+                            System.out.println('\n' + e.getMessage());
+                            break;
                         }
-                    } else {
-                        System.out.println('\n' +
-                                "Membro não removido.");
-                    }
+                        nome = Console.readLine('\n' +
+                                "Informe o nome: ");
+                        posicao = Console.readLine('\n' +
+                                "Informe a posicao: ");
+                        dataCriacao = Console.readLine(
+                                "Informe a data de admissao no time: ");
 
-                    break;
-                }
+                        umMembro = new Membro(nome, posicao, Util.strToCalendar(dataCriacao), umTime);
 
-                case 3: {
-                    List<Membro> arrayMembros = membroAppService.recuperaMembros();
-
-                    if (arrayMembros.size() == 0) {
-                        System.out.println('\n' +
-                                "Nao há lances cadastrados.");
+                        try {
+                            membroAppService.inclui(umMembro);
+                            System.out.println('\n' + "Membro adicionado com sucesso");
+                        } catch (TimeNaoEncontradoException e) {
+                            e.printStackTrace();
+                        } catch (MembroJaExistenteException e) {
+                            e.printStackTrace();
+                        }
                         break;
                     }
 
-                    System.out.println("");
-                    for (Membro membro : arrayMembros) {
+                    case 2: {
+                        int resposta = Console.readInt('\n' +
+                                "Digite o número do membro que você deseja remover: ");
+
+                        try {
+                            umMembro = membroAppService.recuperaUmMembro(resposta);
+                        } catch (MembroNaoEncontradoException e) {
+                            System.out.println('\n' + e.getMessage());
+                            break;
+                        } catch (TimeNaoEncontradoException e) {
+                            System.out.println('\n' + e.getMessage());
+                            break;
+                        }
+
                         System.out.println('\n' +
-                                "Número = " + membro.getId() +
-                                "    Nome = " + membro.getNome() +
-                                "    Posição = " + membro.getPosicao() +
-                                "    Data de Adimissão = " + membro.getDataAdimissao());
+                                "Número = " + umMembro.getId() +
+                                "    Nome = " + umMembro.getNome() +
+                                "    Posição = " + umMembro.getPosicao() +
+                                "    Data de Adimissão = " + umMembro.getDataAdimissao());
+
+                        String resp = Console.readLine('\n' +
+                                "Confirma a remoção do membro?");
+
+                        if (resp.equals("s")) {
+                            try {
+                                membroAppService.exclui(umMembro);
+                                System.out.println('\n' +
+                                        "Membro removido com sucesso!");
+                            } catch (MembroNaoEncontradoException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        } else {
+                            System.out.println('\n' +
+                                    "Membro não removido.");
+                        }
+
+                        break;
                     }
 
-                    break;
-                }
+                    case 3: {
+                        List<Membro> arrayMembros = membroAppService.recuperaMembros();
 
-                case 4: {
-                    continua = false;
-                    ((ConfigurableApplicationContext) fabrica).close();
-                    break;
-                }
+                        if (arrayMembros.size() == 0) {
+                            System.out.println('\n' +
+                                    "Nao há lances cadastrados.");
+                            break;
+                        }
 
-                default:
-                    System.out.println('\n' + "Opção inválida!");
+                        System.out.println("");
+                        for (Membro membro : arrayMembros) {
+                            System.out.println('\n' +
+                                    "Número = " + membro.getId() +
+                                    "    Nome = " + membro.getNome() +
+                                    "    Posição = " + membro.getPosicao() +
+                                    "    Data de Adimissão = " + membro.getDataAdimissao());
+                        }
+
+                        break;
+                    }
+
+                    case 4: {
+                        continua = false;
+                        ((ConfigurableApplicationContext) fabrica).close();
+                        break;
+                    }
+
+                    default:
+                        System.out.println('\n' + "Opção inválida!");
+                }
+            } catch (ExecucaoDeMetodoSemARespectivaPermissaoException e){
+                System.out.println(e.getMessage());
             }
         }
     }
