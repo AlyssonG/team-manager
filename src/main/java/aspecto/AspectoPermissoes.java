@@ -33,20 +33,15 @@ public class AspectoPermissoes {
         listaDeNomesDeConstraints = new ArrayList<String>(map.keySet());
     }
 
-    @Pointcut("call(* servico.*.*(..))")
-    public void traduzExcecaoAround() {
-    }
-
-    @Around("traduzExcecaoAround()")
-    public Object traduzExcecaoAround(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Around("call(* servico.*.*(..))")
+    public Object checkPermissionAround(ProceedingJoinPoint joinPoint) throws Throwable {
         try {
             MethodSignature signature = (MethodSignature) joinPoint.getSignature();
             Method method = signature.getMethod();
             checkPermission(method.getDeclaredAnnotations());
-        } catch (Throwable e) {
-            e.printStackTrace();
-        } finally {
             return joinPoint.proceed();
+        } catch (Throwable e) {
+            throw e;
         }
     }
 
