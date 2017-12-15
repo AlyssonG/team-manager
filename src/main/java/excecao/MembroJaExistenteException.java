@@ -5,7 +5,7 @@ import anotacao.ExcecaoDeAplicacao;
 
 @ConstraintViolada(nome = "MEMBRO_UN")
 @ExcecaoDeAplicacao
-public class MembroJaExistenteException extends Throwable {
+public class MembroJaExistenteException extends Exception {
     private final static long serialVersionUID = 1;
 
     public MembroJaExistenteException() {
