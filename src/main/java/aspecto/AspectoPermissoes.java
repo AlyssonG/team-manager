@@ -47,8 +47,9 @@ public class AspectoPermissoes {
 
     private void checkPermission(Annotation[] annotations) throws Throwable{
         PermissaoManager permissaoManager = PermissaoManager.getInstance();
-        for(Annotation annotation : annotations)
-            if(!permissaoManager.hasPermission(annotation.toString()))
-                throw  new ExecucaoDeMetodoSemARespectivaPermissaoException("Você não tem permissão para efetuar esta operação");
+        for(Annotation annotation : annotations) {
+            if (annotation.toString().contains("Role") && !permissaoManager.hasPermission(annotation.toString()))
+                throw new ExecucaoDeMetodoSemARespectivaPermissaoException("Você não tem permissão para efetuar esta operação");
+        }
     }
 }
