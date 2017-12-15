@@ -1,5 +1,6 @@
 package aspecto;
 
+import excecao.ExecucaoDeMetodoSemARespectivaPermissaoException;
 import excecao.ViolacaoDeConstraintDesconhecidaException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -41,12 +42,18 @@ public class AspectoPermissoes {
             MethodSignature signature = (MethodSignature) joinPoint.getSignature();
             Method method = signature.getMethod();
             for(Annotation an : method.getDeclaredAnnotations()) {
-                System.out.println(an.toString());
+                if(!an.toString().toLowerCase().contains(getUserRole())){
+                    throw new ExecucaoDeMetodoSemARespectivaPermissaoException("Você não possui permissão");
+                }
             }
         } catch (Throwable e) {
             e.printStackTrace();
         } finally {
             return joinPoint.proceed();
         }
+    }
+
+    private String getUserRole() {
+        return "roleuser1";
     }
 }
