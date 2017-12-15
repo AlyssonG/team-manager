@@ -1,3 +1,4 @@
+import Permissao.PermissaoManager;
 import corejava.Console;
 import excecao.MembroJaExistenteException;
 import excecao.MembroNaoEncontradoException;
@@ -24,6 +25,10 @@ public class PrincipalMembro {
 
         Time umTime;
         Membro umMembro;
+
+        PermissaoManager permissaoManager = PermissaoManager.getInstance();
+        permissaoManager.addPermission("RoleUser1");
+        permissaoManager.addPermission("RoleAdmin");
 
         ApplicationContext fabrica = new ClassPathXmlApplicationContext("beans-jpa.xml");
 
