@@ -53,6 +53,7 @@ public class MembroAppService {
         }
     }
 
+    @RoleAdmin
     public List<Membro> recuperaMembros() {
         return membroDAO.recuperaMembros();
     }
