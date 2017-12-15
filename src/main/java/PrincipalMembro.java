@@ -95,7 +95,7 @@ public class PrincipalMembro {
                             "    Data de Adimissão = " + umMembro.getDataAdimissao());
 
                     String resp = Console.readLine('\n' +
-                            "Confirma a remoção do lance?");
+                            "Confirma a remoção do membro?");
 
                     if (resp.equals("s")) {
                         try {

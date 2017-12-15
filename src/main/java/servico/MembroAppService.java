@@ -1,5 +1,6 @@
 package servico;
 
+import anotacao.RoleAdmin;
 import dao.MembroDAO;
 import dao.TimeDAO;
 import excecao.MembroJaExistenteException;
@@ -25,6 +26,7 @@ public class MembroAppService {
         this.membroDAO = membroDAO;
     }
 
+    @RoleAdmin
     @Transactional
     public long inclui(Membro umMembro) throws TimeNaoEncontradoException, MembroJaExistenteException {
         Membro membro = membroDAO.inclui(umMembro);
