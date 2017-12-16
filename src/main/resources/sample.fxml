@@ -24,7 +24,7 @@
             <Label layoutX="3.0" layoutY="118.0" text="Data Admissao" />
          </children>
       </Pane>
-      <Pane layoutX="52.0" layoutY="83.0" prefHeight="170.0" prefWidth="300.0" style="-fx-border-color: #000000;">
+      <Pane fx:id="timePane" disable="true" layoutX="52.0" layoutY="83.0" prefHeight="170.0" prefWidth="300.0" style="-fx-border-color: #000000;" visible="false">
          <children>
             <Button fx:id="btnNovoTime" layoutX="248.0" layoutY="34.0" mnemonicParsing="false" text="Novo" />
             <Button fx:id="btnCadastrarTime" disable="true" layoutX="217.0" layoutY="60.0" mnemonicParsing="false" text="Cadastrar" />

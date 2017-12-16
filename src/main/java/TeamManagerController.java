@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 public class TeamManagerController {
 
     @FXML
-    Pane membroPane;
+    Pane membroPane,timePane;
 
     @FXML
     Button btnNovoMembro, btnCadastrarMembro, btnEditarMembro, btnAlterarMembro, btnBuscarMembro;
@@ -20,8 +20,8 @@ public class TeamManagerController {
     TextField nomeTime, ligaTime;
 
     public void initialize(){
-//        membroPane.setVisible(true);
-//        membroPane.setDisable(false);
+        disablePane(membroPane);
+        disablePane(timePane);
     }
 
     @FXML
@@ -61,5 +61,14 @@ public class TeamManagerController {
         } else{
             btnCadastrarMembro.setDisable(false);
         }
+    }
+
+    private void enablePane(Pane pane){
+        pane.setDisable(false);
+        pane.setVisible(true);
+    }
+    private void disablePane(Pane pane){
+        pane.setDisable(true);
+        pane.setVisible(false);
     }
 }
