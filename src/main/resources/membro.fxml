@@ -14,11 +14,11 @@
         <Button fx:id="btnAlterarMembro" disable="true" layoutX="281.0" layoutY="113.0" mnemonicParsing="false" onAction="#alterarMembro" text="Alterar" />
         <Button fx:id="btnBuscarMembro" layoutX="281.0" layoutY="139.0" mnemonicParsing="false" onAction="#buscarMembro" text="Buscar" />
         <Label fx:id="test" layoutX="149.0" layoutY="6.0" text="Membro" />
-        <TextField fx:id="nomeMembro" disable="true" layoutX="104.0" layoutY="42.0" prefHeight="26.0" prefWidth="126.0" />
+        <TextField fx:id="nomeMembro" disable="true" layoutX="104.0" layoutY="42.0" onKeyTyped="#checkAllFields" prefHeight="26.0" prefWidth="126.0" />
         <Label layoutX="32.0" layoutY="47.0" text="Nome" />
-        <TextField fx:id="posicaoMembro" disable="true" layoutX="104.0" layoutY="78.0" prefHeight="26.0" prefWidth="126.0" />
+        <TextField fx:id="posicaoMembro" disable="true" layoutX="104.0" layoutY="78.0" onKeyTyped="#checkAllFields" prefHeight="26.0" prefWidth="126.0" />
         <Label layoutX="27.0" layoutY="83.0" text="Posicao" />
-        <TextField fx:id="dataMembro" disable="true" layoutX="104.0" layoutY="113.0" onKeyTyped="#checkDataMembro" prefHeight="26.0" prefWidth="126.0" />
+        <TextField fx:id="dataMembro" disable="true" layoutX="104.0" layoutY="113.0" onKeyTyped="#checkAllFields" prefHeight="26.0" prefWidth="126.0" />
         <Label layoutX="3.0" layoutY="118.0" text="Data Admissao" />
       <Label layoutX="35.0" layoutY="147.0" text="Time" />
       <ComboBox fx:id="timesMembro" disable="true" layoutX="104.0" layoutY="143.0" prefHeight="26.0" prefWidth="126.0" />

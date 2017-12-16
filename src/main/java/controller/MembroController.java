@@ -36,20 +36,14 @@ public class MembroController {
 
     @FXML
     private void novoMembro() {
-        nomeMembro.setDisable(false);
-        posicaoMembro.setDisable(false);
-        dataMembro.setDisable(false);
-
-        timesMembro.setItems(getTeamsToComboBox());
-        timesMembro.setDisable(false);
+        btnNovoMembro.setDisable(true);
+        turnOnFields();
     }
 
     @FXML
     private void cadastrarMembro() throws TimeNaoEncontradoException, MembroJaExistenteException {
-        nomeMembro.setDisable(true);
-        posicaoMembro.setEditable(true);
-        dataMembro.setEditable(true);
-        timesMembro.setEditable(true);
+        btnNovoMembro.setDisable(false);
+        btnCadastrarMembro.setDisable(true);
 
         Membro m = new Membro(nomeMembro.getText(),
                 posicaoMembro.getText(),
@@ -57,10 +51,9 @@ public class MembroController {
                 getTime((String) timesMembro.getValue()));
 
         membroService.inclui(m);
-        nomeMembro.setText("");
-        posicaoMembro.setText("");
-        dataMembro.setText("");
-        timesMembro.setValue("");
+
+        turnOffFields();
+        cleanFields();
     }
 
     private Time getTime(String text) {
@@ -75,22 +68,27 @@ public class MembroController {
 
     @FXML
     private void editarMembro() {
-
+        btnNovoMembro.setDisable(false);
+        btnEditarMembro.setDisable(true);
+        turnOnFields();
     }
 
     @FXML
     private void alterarMembro() {
-
+        btnNovoMembro.setDisable(false);
+        turnOffFields();
+        cleanFields();
     }
 
     @FXML
     private void buscarMembro() {
+        btnNovoMembro.setDisable(false);
 
     }
 
     @FXML
-    private void checkDataMembro() {
-        if (dataMembro.getText().length() < 9) {
+    private void checkAllFields() {
+        if (nomeMembro.getText().length() == 0 || posicaoMembro.getText().length() == 0 || dataMembro.getText().length() < 9) {
             btnCadastrarMembro.setDisable(true);
         } else {
             btnCadastrarMembro.setDisable(false);
@@ -104,5 +102,28 @@ public class MembroController {
             timesNome.add(t.getNome());
         }
         return timesNome;
+    }
+
+    void turnOnFields(){
+        nomeMembro.setDisable(false);
+        posicaoMembro.setDisable(false);
+        dataMembro.setDisable(false);
+        timesMembro.setItems(getTeamsToComboBox());
+        timesMembro.setValue(timesMembro.getItems().get(0));
+        timesMembro.setDisable(false);
+    }
+
+    void turnOffFields(){
+        nomeMembro.setDisable(true);
+        posicaoMembro.setDisable(true);
+        dataMembro.setDisable(true);
+        timesMembro.setDisable(true);
+    }
+
+    void cleanFields(){
+        nomeMembro.setText("");
+        posicaoMembro.setText("");
+        dataMembro.setText("");
+        timesMembro.setValue("");
     }
 }
