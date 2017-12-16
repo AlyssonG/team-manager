@@ -54,7 +54,7 @@ public class MembroController {
         Membro m = new Membro(nomeMembro.getText(),
                 posicaoMembro.getText(),
                 Util.strToCalendar(dataMembro.getText()),
-                getTime((String)timesMembro.getValue()));
+                getTime((String) timesMembro.getValue()));
 
         membroService.inclui(m);
         nomeMembro.setText("");
@@ -65,8 +65,8 @@ public class MembroController {
 
     private Time getTime(String text) {
         Set<Time> ts = timeService.recuperaTimesEMembros();
-        for(Time t : ts){
-            if(t.getNome().equals(text)){
+        for (Time t : ts) {
+            if (t.getNome().equals(text)) {
                 return t;
             }
         }
