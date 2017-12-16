@@ -15,8 +15,8 @@ public class TeamManager extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello");
+        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+        primaryStage.setTitle("Team Manager");
         primaryStage.setScene(new Scene(root,800,600));
         primaryStage.show();
 
