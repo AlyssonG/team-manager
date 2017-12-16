@@ -1,6 +1,6 @@
 package aspecto;
 
-import Permissao.PermissaoManager;
+import permissao.PermissaoManager;
 import excecao.ExecucaoDeMetodoSemARespectivaPermissaoException;
 import excecao.ViolacaoDeConstraintDesconhecidaException;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -10,7 +10,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.reflections.Reflections;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
