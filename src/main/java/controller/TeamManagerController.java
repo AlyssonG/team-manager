@@ -1,36 +1,34 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import javax.swing.*;
+import java.io.IOException;
 
 public class TeamManagerController {
 
     @FXML
-    Pane rootPane, membroPane, timePane;
+    Pane rootPane;
 
-    public void initialize() {
-        disablePane(membroPane);
-        disablePane(timePane);
-    }
-
-    private void disablePane(Pane pane) {
-        pane.setDisable(true);
-        pane.setVisible(false);
+    @FXML
+    private void openMembroPane() throws IOException {
+        createPopUp("membro");
     }
 
     @FXML
-    private void openMembroPane(){
-        Stage newStage = new Stage();
+    private void openTimePane() throws IOException {
+        createPopUp("time");
+    }
 
-        Scene scene = new Scene(membroPane,450,300);
-        newStage.setScene(scene);
-        newStage.show();
+    void createPopUp(String name) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("../" + name + ".fxml"));
+        Stage stage = new Stage();
+        stage.setTitle(name);
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 }

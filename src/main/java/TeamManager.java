@@ -1,5 +1,4 @@
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,12 +13,10 @@ public class TeamManager extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException{
+    public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("Team Manager");
-        primaryStage.setScene(new Scene(root,800,600));
+        primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
-
-        primaryStage.setOnCloseRequest(e -> Platform.exit());
     }
 }
