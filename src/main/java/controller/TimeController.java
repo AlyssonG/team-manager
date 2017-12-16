@@ -59,9 +59,11 @@ public class TimeController {
 
     @FXML
     private void checkFields() {
-        if (nomeTime.getText().length() == 0 && ligaTime.getText().length() == 0)
+        if (nomeTime.getText().length() == 0 || ligaTime.getText().length() == 0)
             btnCadastrarTime.setDisable(true);
-        btnCadastrarTime.setDisable(false);
+        else {
+            btnCadastrarTime.setDisable(false);
+        }
     }
 
     private void turnOnFields() {
