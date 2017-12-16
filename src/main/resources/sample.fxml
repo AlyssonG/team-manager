@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TeamManagerController">
+   <children>
+      <Pane layoutX="29.0" layoutY="43.0" prefHeight="181.0" prefWidth="291.0">
+         <children>
+            <Button fx:id="btnNovoMembro" layoutX="240.0" layoutY="35.0" mnemonicParsing="false" text="Novo" />
+            <Button fx:id="btnCadastrarMembro" layoutX="210.0" layoutY="61.0" mnemonicParsing="false" text="Cadastrar" />
+            <Button fx:id="btnEditarMembro" layoutX="237.0" layoutY="87.0" mnemonicParsing="false" text="Editar" />
+            <Button fx:id="btnAlterarMembro" layoutX="234.0" layoutY="113.0" mnemonicParsing="false" text="Alterar" />
+            <Button fx:id="btnBuscarMembro" layoutX="234.0" layoutY="139.0" mnemonicParsing="false" text="Buscar" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
