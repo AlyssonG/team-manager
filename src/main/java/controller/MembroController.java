@@ -1,28 +1,14 @@
+package controller;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 
-public class TeamManagerController {
-
-    @FXML
-    Pane membroPane,timePane;
-
+public class MembroController {
     @FXML
     Button btnNovoMembro, btnCadastrarMembro, btnEditarMembro, btnAlterarMembro, btnBuscarMembro;
     @FXML
     TextField nomeMembro, posicaoMembro, dataMembro;
-
-    @FXML
-    Button btnNovoTime, btnCadastrarTime, btnEditarTime, btnAlterarTime, btnBuscarTime;
-    @FXML
-    TextField nomeTime, ligaTime;
-
-    public void initialize(){
-        disablePane(membroPane);
-        disablePane(timePane);
-    }
 
     @FXML
     private void novoMembro() {
@@ -55,20 +41,11 @@ public class TeamManagerController {
     }
 
     @FXML
-    private void checkDataMembro(){
-        if(dataMembro.getText().length() < 9){
+    private void checkDataMembro() {
+        if (dataMembro.getText().length() < 9) {
             btnCadastrarMembro.setDisable(true);
-        } else{
+        } else {
             btnCadastrarMembro.setDisable(false);
         }
-    }
-
-    private void enablePane(Pane pane){
-        pane.setDisable(false);
-        pane.setVisible(true);
-    }
-    private void disablePane(Pane pane){
-        pane.setDisable(true);
-        pane.setVisible(false);
     }
 }
