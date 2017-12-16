@@ -1,5 +1,7 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 public class TeamManagerController {
 
@@ -7,13 +9,21 @@ public class TeamManagerController {
     Button btnNovoMembro, btnCadastrarMembro, btnEditarMembro, btnAlterarMembro, btnBuscarMembro;
 
     @FXML
-    private void novoMembro() {
+    TextField nomeMembro, posicaoMembro, dataMembro;
 
+    @FXML
+    private void novoMembro() {
+        nomeMembro.setEditable(true);
+        posicaoMembro.setEditable(true);
+        dataMembro.setEditable(true);
     }
 
     @FXML
     private void cadastrarMembro() {
-
+        nomeMembro.setEditable(false);
+        posicaoMembro.setEditable(false);
+        dataMembro.setEditable(false);
+        //chamar BD com informações
     }
 
     @FXML
@@ -29,5 +39,14 @@ public class TeamManagerController {
     @FXML
     private void buscarMembro() {
 
+    }
+
+    @FXML
+    private void checkDataMembro(){
+        if(dataMembro.getText().length() < 9){
+            btnCadastrarMembro.setDisable(true);
+        } else{
+            btnCadastrarMembro.setDisable(false);
+        }
     }
 }

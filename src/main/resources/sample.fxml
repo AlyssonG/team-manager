@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TeamManagerController">
    <children>
-      <Pane layoutX="29.0" layoutY="43.0" prefHeight="181.0" prefWidth="291.0">
+      <Pane layoutX="113.0" layoutY="99.0" prefHeight="181.0" prefWidth="344.0">
          <children>
-            <Button fx:id="btnNovoMembro" layoutX="240.0" layoutY="35.0" mnemonicParsing="false" text="Novo" />
-            <Button fx:id="btnCadastrarMembro" layoutX="210.0" layoutY="61.0" mnemonicParsing="false" text="Cadastrar" />
-            <Button fx:id="btnEditarMembro" layoutX="237.0" layoutY="87.0" mnemonicParsing="false" text="Editar" />
-            <Button fx:id="btnAlterarMembro" layoutX="234.0" layoutY="113.0" mnemonicParsing="false" text="Alterar" />
-            <Button fx:id="btnBuscarMembro" layoutX="234.0" layoutY="139.0" mnemonicParsing="false" text="Buscar" />
+            <Button fx:id="btnNovoMembro" layoutX="293.0" layoutY="35.0" mnemonicParsing="false" onAction="#novoMembro" onDragDetected="#cadastrarMembro" text="Novo" />
+            <Button fx:id="btnCadastrarMembro" disable="true" layoutX="262.0" layoutY="61.0" mnemonicParsing="false" text="Cadastrar" />
+            <Button fx:id="btnEditarMembro" disable="true" layoutX="287.0" layoutY="87.0" mnemonicParsing="false" onAction="#editarMembro" text="Editar" />
+            <Button fx:id="btnAlterarMembro" disable="true" layoutX="281.0" layoutY="113.0" mnemonicParsing="false" onAction="#alterarMembro" text="Alterar" />
+            <Button fx:id="btnBuscarMembro" disable="true" layoutX="281.0" layoutY="139.0" mnemonicParsing="false" onAction="#buscarMembro" text="Buscar" />
+            <Label fx:id="test" layoutX="128.0" layoutY="6.0" text="Membro" />
+            <TextField fx:id="nomeMembro" editable="false" layoutX="104.0" layoutY="42.0" prefHeight="26.0" prefWidth="126.0" />
+            <Label layoutX="41.0" layoutY="47.0" text="Nome" />
+            <TextField fx:id="posicaoMembro" editable="false" layoutX="104.0" layoutY="78.0" prefHeight="26.0" prefWidth="126.0" />
+            <Label layoutX="27.0" layoutY="83.0" text="Posicao" />
+            <TextField fx:id="dataMembro" editable="false" layoutX="104.0" layoutY="113.0" onKeyTyped="#checkDataMembro" prefHeight="26.0" prefWidth="126.0" />
+            <Label layoutY="118.0" text="Data Admissao" />
          </children>
       </Pane>
    </children>
