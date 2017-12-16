@@ -2,14 +2,27 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 
 public class TeamManagerController {
 
     @FXML
-    Button btnNovoMembro, btnCadastrarMembro, btnEditarMembro, btnAlterarMembro, btnBuscarMembro;
+    Pane membroPane;
 
     @FXML
+    Button btnNovoMembro, btnCadastrarMembro, btnEditarMembro, btnAlterarMembro, btnBuscarMembro;
+    @FXML
     TextField nomeMembro, posicaoMembro, dataMembro;
+
+    @FXML
+    Button btnNovoTime, btnCadastrarTime, btnEditarTime, btnAlterarTime, btnBuscarTime;
+    @FXML
+    TextField nomeTime, ligaTime;
+
+    public void initialize(){
+//        membroPane.setVisible(true);
+//        membroPane.setDisable(false);
+    }
 
     @FXML
     private void novoMembro() {
