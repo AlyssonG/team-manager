@@ -78,7 +78,7 @@ public class Membro {
     }
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "TIME_ID")
     public Time getTime() {
         return time;
