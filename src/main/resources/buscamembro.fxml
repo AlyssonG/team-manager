@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="227.0" prefWidth="476.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BuscaMembroController">
+   <children>
+      <Label layoutX="36.0" layoutY="46.0" text="Digite o nome:" />
+      <TextField fx:id="nome" layoutX="169.0" layoutY="41.0" prefHeight="26.0" prefWidth="279.0" />
+      <Label layoutX="184.0" layoutY="14.0" text="Buscar Membro" />
+      <TableView fx:id="tableMembro" layoutX="50.0" layoutY="86.0" prefHeight="144.0" prefWidth="398.0" />
+   </children>
+</AnchorPane>

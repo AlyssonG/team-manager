@@ -1,5 +1,6 @@
 package controller;
 
+import excecao.ExecucaoDeMetodoSemARespectivaPermissaoException;
 import excecao.MembroJaExistenteException;
 import excecao.TimeNaoEncontradoException;
 import javafx.collections.FXCollections;
@@ -20,6 +21,7 @@ import servico.TimeAppService;
 import util.Util;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 public class MembroController extends GenericController{
@@ -84,8 +86,18 @@ public class MembroController extends GenericController{
     }
 
     @FXML
-    private void buscarMembro() {
+    private void buscarMembro() throws IOException{
         btnNovoMembro.setDisable(false);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../buscamembro.fxml"));
+        Parent parent = loader.load();
+        BuscaMembroController controller = loader.getController();
+        controller.setController(this);
+
+        Stage stage = new Stage();
+        stage.setTitle("Busca Membro");
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 
     @FXML
@@ -140,6 +152,18 @@ public class MembroController extends GenericController{
         timesMembro.setText("");
     }
 
+    public void preenche(String key) throws ExecucaoDeMetodoSemARespectivaPermissaoException {
+        List<Membro> membros = membroService.recuperaMembros();
+        for(Membro m : membros){
+            if(m.getNome().equals(key)){
+                nomeMembro.setText(key);
+                posicaoMembro.setText(m.getPosicao());
+                dataMembro.setText(m.getDataAdimissao().toString());
+                timesMembro.setText(m.getTime().getNome());
+                return;
+            }
+        }
+    }
     @Override
     public void fillInfo(String key) {
         timesMembro.setText(key);
