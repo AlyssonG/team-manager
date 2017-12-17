@@ -4,16 +4,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Window;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import modelo.Time;
 import servico.ServiceSingleton;
 import servico.TimeAppService;
 
-import java.io.IOException;
 import java.util.Set;
 
 public class BuscaTimeController {
@@ -58,6 +56,8 @@ public class BuscaTimeController {
                                 public void handle(ActionEvent event) {
                                     TimeRow data = (TimeRow) tableTime.getItems().get(getIndex());
                                     preencheInfoTime(data.getNome());
+                                    Stage stage = (Stage) btn.getParent().getScene().getWindow();
+                                    stage.close();
                                 }
                             });
                             setGraphic(btn);
