@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -40,12 +42,37 @@ public class BuscaTimeController {
         ligaColumn.setCellValueFactory(new PropertyValueFactory<TimeRow, String>("liga"));
 
         selecionarColumn = new TableColumn("Selecionar");
+        selecionarColumn.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
 
-
+        Callback<TableColumn, TableCell<TimeRow, String>> cellFactory = new Callback<TableColumn, TableCell<TimeRow, String>>() {
+            @Override
+            public TableCell<TimeRow, String> call(TableColumn param) {
+                final TableCell<TimeRow, String> cell = new TableCell<TimeRow, String>() {
+                    final Button btn = new Button("Just Do It");
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            btn.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    System.out.println("oi");
+                                }
+                            });
+                            setGraphic(btn);
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        selecionarColumn.setCellFactory(cellFactory);
         tableTime.getColumns().addAll(nomeColumn, ligaColumn, selecionarColumn);
-
         timeService = ServiceSingleton.getInstance().getTimeService();
-
         Set<Time> times = timeService.recuperaTimesEMembros();
         for (Time t : times) {
             tableTime.getItems().add(new TimeRow(t.getNome(), t.getLiga()));
