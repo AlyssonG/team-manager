@@ -5,9 +5,13 @@ import excecao.TimeNaoEncontradoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import modelo.Membro;
 import modelo.Time;
 import servico.MembroAppService;
@@ -15,18 +19,17 @@ import servico.ServiceSingleton;
 import servico.TimeAppService;
 import util.Util;
 
+import java.io.IOException;
 import java.util.Set;
 
-public class MembroController {
+public class MembroController extends GenericController{
     MembroAppService membroService;
     TimeAppService timeService;
 
     @FXML
     Button btnNovoMembro, btnCadastrarMembro, btnEditarMembro, btnAlterarMembro, btnBuscarMembro;
     @FXML
-    TextField nomeMembro, posicaoMembro, dataMembro;
-    @FXML
-    ComboBox timesMembro;
+    TextField nomeMembro, posicaoMembro, dataMembro, timesMembro;
 
     @FXML
     public void initialize() {
@@ -48,7 +51,7 @@ public class MembroController {
         Membro m = new Membro(nomeMembro.getText(),
                 posicaoMembro.getText(),
                 Util.strToCalendar(dataMembro.getText()),
-                getTime((String) timesMembro.getValue()));
+                getTime(timesMembro.getText()));
 
         membroService.inclui(m);
 
@@ -83,7 +86,19 @@ public class MembroController {
     @FXML
     private void buscarMembro() {
         btnNovoMembro.setDisable(false);
+    }
 
+    @FXML
+    private void buscarTime() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../buscatime.fxml"));
+        Parent parent = loader.load();
+        BuscaTimeController controller = loader.getController();
+        controller.setLastController(this);
+
+        Stage stage = new Stage();
+        stage.setTitle("Busca Time");
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 
     @FXML
@@ -108,8 +123,6 @@ public class MembroController {
         nomeMembro.setDisable(false);
         posicaoMembro.setDisable(false);
         dataMembro.setDisable(false);
-        timesMembro.setItems(getTeamsToComboBox());
-        timesMembro.setValue(timesMembro.getItems().get(0));
         timesMembro.setDisable(false);
     }
 
@@ -124,6 +137,11 @@ public class MembroController {
         nomeMembro.setText("");
         posicaoMembro.setText("");
         dataMembro.setText("");
-        timesMembro.setValue("");
+        timesMembro.setText("");
+    }
+
+    @Override
+    public void fillInfo(String key) {
+        timesMembro.setText(key);
     }
 }
