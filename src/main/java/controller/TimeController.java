@@ -13,12 +13,14 @@ import servico.ServiceSingleton;
 import servico.TimeAppService;
 
 import java.io.IOException;
+import java.util.Set;
 
-public class TimeController {
+public class TimeController extends GenericController {
     @FXML
     Button btnNovoTime, btnCadastrarTime, btnEditarTime, btnAlterarTime, btnBuscarTime;
     @FXML
     TextField nomeTime, ligaTime;
+
     private MembroAppService membroService;
     private TimeAppService timeService;
 
@@ -60,7 +62,12 @@ public class TimeController {
     @FXML
     private void buscarTime() throws IOException {
         btnNovoTime.setDisable(false);
-        Parent parent = FXMLLoader.load(getClass().getResource("../buscatime.fxml"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../buscatime.fxml"));
+        Parent parent = loader.load();
+        BuscaTimeController controller = (BuscaTimeController) loader.getController();
+        controller.setLastController(this);
+
         Stage stage = new Stage();
         stage.setTitle("Busca Time");
         stage.setScene(new Scene(parent));
@@ -89,5 +96,15 @@ public class TimeController {
     private void cleanFields() {
         nomeTime.setText("");
         ligaTime.setText("");
+    }
+
+    @Override
+    public void fillInfo(String key) {
+        Set<Time> times = timeService.recuperaTimesEMembros();
+        for(Time t : times)
+            if(t.getNome().equals(key)) {
+                nomeTime.setText(key);
+                ligaTime.setText(t.getLiga());
+            }
     }
 }

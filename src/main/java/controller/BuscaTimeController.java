@@ -1,28 +1,26 @@
 package controller;
 
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Window;
 import javafx.util.Callback;
 import modelo.Time;
 import servico.ServiceSingleton;
 import servico.TimeAppService;
 
+import java.io.IOException;
 import java.util.Set;
 
 public class BuscaTimeController {
     @FXML
     TextField time;
 
-    @FXML
-    Button seleciona;
+    GenericController lastController;
 
     @FXML
     TableView tableTime;
@@ -30,8 +28,6 @@ public class BuscaTimeController {
     TableColumn nomeColumn, ligaColumn, selecionarColumn;
 
     private TimeAppService timeService;
-
-    ObservableList<Time> times;
 
     @FXML
     void initialize() {
@@ -47,8 +43,9 @@ public class BuscaTimeController {
         Callback<TableColumn, TableCell<TimeRow, String>> cellFactory = new Callback<TableColumn, TableCell<TimeRow, String>>() {
             @Override
             public TableCell<TimeRow, String> call(TableColumn param) {
-                final TableCell<TimeRow, String> cell = new TableCell<TimeRow, String>() {
-                    final Button btn = new Button("Just Do It");
+                TableCell<TimeRow, String> cell = new TableCell<TimeRow, String>() {
+                    final Button btn = new Button("Selecionar");
+
                     @Override
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
@@ -59,7 +56,8 @@ public class BuscaTimeController {
                             btn.setOnAction(new EventHandler<ActionEvent>() {
                                 @Override
                                 public void handle(ActionEvent event) {
-                                    System.out.println("oi");
+                                    TimeRow data = (TimeRow) tableTime.getItems().get(getIndex());
+                                    preencheInfoTime(data.getNome());
                                 }
                             });
                             setGraphic(btn);
@@ -79,9 +77,12 @@ public class BuscaTimeController {
         }
     }
 
-    @FXML
-    public void selecionaTime() {
-        seleciona.getParent();
+    public void setLastController(GenericController controller) {
+        this.lastController = controller;
+    }
+
+    void preencheInfoTime(String nomeTime) {
+        lastController.fillInfo(nomeTime);
     }
 
     public class TimeRow {
