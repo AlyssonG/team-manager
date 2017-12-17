@@ -1,12 +1,18 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import modelo.Time;
 import servico.MembroAppService;
 import servico.ServiceSingleton;
 import servico.TimeAppService;
+
+import java.io.IOException;
 
 public class TimeController {
     @FXML
@@ -52,9 +58,13 @@ public class TimeController {
     }
 
     @FXML
-    private void buscarTime() {
+    private void buscarTime() throws IOException {
         btnNovoTime.setDisable(false);
-
+        Parent parent = FXMLLoader.load(getClass().getResource("../buscatime.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Busca Time");
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 
     @FXML
