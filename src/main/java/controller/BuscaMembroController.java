@@ -13,13 +13,15 @@ import modelo.Membro;
 import servico.MembroAppService;
 import servico.ServiceSingleton;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class BuscaMembroController {
 
     MembroController controller;
     MembroAppService membroService;
-
+    final DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
     @FXML
     TextField nome;
 
@@ -81,17 +83,29 @@ public class BuscaMembroController {
         selecionarColumn.setCellFactory(cellFactory);
         membroService = ServiceSingleton.getInstance().getMembroService();
         tableMembro.getColumns().addAll(nomeColumn, posicaoColumn, admissaoColumn, timeColumn,selecionarColumn);
+        addMembros("");
+    }
+
+    private void addMembros(String like) throws ExecucaoDeMetodoSemARespectivaPermissaoException {
+        tableMembro.getItems().clear();
         List<Membro> membros = membroService.recuperaMembros();
         for (Membro m : membros) {
-            tableMembro.getItems().add(new MembroRow(m.getNome(), m.getPosicao(), m.getDataAdimissao().getTime().toString(), m.getTime().getNome()));
+            if(m.getNome().contains(like))
+                tableMembro.getItems().add(new MembroRow(m.getNome(),
+                                                         m.getPosicao(),
+                                                         df.format(m.getDataAdimissao().getTime()),
+                                                         m.getTime().getNome()));
         }
-
     }
 
     private void preencherMembro(String nome) throws ExecucaoDeMetodoSemARespectivaPermissaoException {
         controller.preenche(nome);
     }
 
+    @FXML
+    void fillWhenType() throws ExecucaoDeMetodoSemARespectivaPermissaoException {
+        addMembros(nome.getText());
+    }
     public void setController(MembroController controller) {
         this.controller = controller;
     }
