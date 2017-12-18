@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="membroPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="181.0" prefWidth="351.0" style="-fx-border-color: #000000;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MembroController">
+<Pane fx:id="membroPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="181.0" prefWidth="351.0" style="-fx-border-color: #000000;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MembroController">
     <children>
         <Button fx:id="btnNovoMembro" layoutX="292.0" layoutY="35.0" mnemonicParsing="false" onAction="#novoMembro" onDragDetected="#cadastrarMembro" text="Novo" />
         <Button fx:id="btnCadastrarMembro" disable="true" layoutX="262.0" layoutY="61.0" mnemonicParsing="false" onAction="#cadastrarMembro" text="Cadastrar" />
@@ -21,12 +21,12 @@
         <TextField fx:id="dataMembro" disable="true" layoutX="104.0" layoutY="113.0" onKeyTyped="#checkAllFields" prefHeight="26.0" prefWidth="126.0" />
         <Label layoutX="3.0" layoutY="118.0" text="Data Admissao" />
         <Label layoutX="35.0" layoutY="147.0" text="Time" />
-        <TextField fx:id="timesMembro" disable="true" layoutX="104.0" layoutY="143.0" prefHeight="26.0" prefWidth="126.0" />
-      <Button layoutX="231.0" layoutY="148.0" mnemonicParsing="false" onAction="#buscarTime" text="Buscar">
-         <font>
-            <Font size="8.0" />
-         </font>
-      </Button>
+        <TextField fx:id="timesMembro" disable="true" editable="false" layoutX="104.0" layoutY="143.0" prefHeight="26.0" prefWidth="126.0" />
+        <Button fx:id="buscaTime" layoutX="231.0" layoutY="148.0" mnemonicParsing="false" onAction="#buscarTime" text="Buscar">
+            <font>
+                <Font size="8.0" />
+            </font>
+        </Button>
 
     </children>
 </Pane>

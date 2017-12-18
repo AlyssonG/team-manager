@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Set;
 
-public class MembroController extends GenericController{
+public class MembroController extends GenericController {
 
     final DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -34,7 +34,7 @@ public class MembroController extends GenericController{
     TimeAppService timeService;
 
     @FXML
-    Button btnNovoMembro, btnCadastrarMembro, btnEditarMembro, btnAlterarMembro, btnBuscarMembro;
+    Button btnNovoMembro, btnCadastrarMembro, btnEditarMembro, btnAlterarMembro, btnBuscarMembro, buscaTime;
     @FXML
     TextField nomeMembro, posicaoMembro, dataMembro, timesMembro;
 
@@ -42,11 +42,13 @@ public class MembroController extends GenericController{
     public void initialize() {
         membroService = ServiceSingleton.getInstance().getMembroService();
         timeService = ServiceSingleton.getInstance().getTimeService();
+        buscaTime.setDisable(true);
     }
 
     @FXML
     private void novoMembro() {
         btnNovoMembro.setDisable(true);
+        buscaTime.setDisable(false);
         turnOnFields();
     }
 
@@ -54,7 +56,7 @@ public class MembroController extends GenericController{
     private void cadastrarMembro() throws TimeNaoEncontradoException, MembroJaExistenteException {
         btnNovoMembro.setDisable(false);
         btnCadastrarMembro.setDisable(true);
-
+        buscaTime.setDisable(true);
         Membro m = new Membro(nomeMembro.getText(),
                 posicaoMembro.getText(),
                 Util.strToCalendar(dataMembro.getText()),
@@ -80,19 +82,35 @@ public class MembroController extends GenericController{
     private void editarMembro() {
         btnNovoMembro.setDisable(false);
         btnEditarMembro.setDisable(true);
+        buscaTime.setDisable(false);
         turnOnFields();
     }
 
     @FXML
-    private void alterarMembro() {
+    private void alterarMembro() throws ExecucaoDeMetodoSemARespectivaPermissaoException {
         btnNovoMembro.setDisable(false);
+        buscaTime.setDisable(true);
+
+        List<Membro> membros = membroService.recuperaMembros();
+        for(Membro m : membros){
+            if(m.getNome().equals(nomeMembro.getText())){
+                m.setNome(nomeMembro.getText());
+                m.setPosicao(posicaoMembro.getText());
+                m.setDataAdimissao(Util.strToCalendar(dataMembro.getText()));
+                m.setTime(getTime(timesMembro.getText()));
+                membroService.altera(m);
+            }
+        }
         turnOffFields();
         cleanFields();
     }
 
     @FXML
-    private void buscarMembro() throws IOException{
+    private void buscarMembro() throws IOException {
         btnNovoMembro.setDisable(false);
+        buscaTime.setDisable(true);
+        cleanFields();
+        turnOffFields();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../buscamembro.fxml"));
         Parent parent = loader.load();
@@ -106,7 +124,9 @@ public class MembroController extends GenericController{
     }
 
     @FXML
-    private void buscarTime() throws IOException{
+    private void buscarTime() throws IOException {
+        buscaTime.setDisable(true);
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../buscatime.fxml"));
         Parent parent = loader.load();
         BuscaTimeController controller = loader.getController();
@@ -120,10 +140,12 @@ public class MembroController extends GenericController{
 
     @FXML
     private void checkAllFields() {
-        if (nomeMembro.getText().length() == 0 || posicaoMembro.getText().length() == 0 || dataMembro.getText().length() < 9) {
+        if (nomeMembro.getText().length() == 0 || posicaoMembro.getText().length() == 0 || dataMembro.getText().length() < 9 || timesMembro.getText().length() == 0) {
             btnCadastrarMembro.setDisable(true);
+            btnAlterarMembro.setDisable(true);
         } else {
             btnCadastrarMembro.setDisable(false);
+            btnAlterarMembro.setDisable(false);
         }
     }
 
@@ -136,21 +158,21 @@ public class MembroController extends GenericController{
         return timesNome;
     }
 
-    void turnOnFields(){
+    void turnOnFields() {
         nomeMembro.setDisable(false);
         posicaoMembro.setDisable(false);
         dataMembro.setDisable(false);
         timesMembro.setDisable(false);
     }
 
-    void turnOffFields(){
+    void turnOffFields() {
         nomeMembro.setDisable(true);
         posicaoMembro.setDisable(true);
         dataMembro.setDisable(true);
         timesMembro.setDisable(true);
     }
 
-    void cleanFields(){
+    void cleanFields() {
         nomeMembro.setText("");
         posicaoMembro.setText("");
         dataMembro.setText("");
@@ -159,16 +181,18 @@ public class MembroController extends GenericController{
 
     public void preenche(String key) throws ExecucaoDeMetodoSemARespectivaPermissaoException {
         List<Membro> membros = membroService.recuperaMembros();
-        for(Membro m : membros){
-            if(m.getNome().equals(key)){
+        for (Membro m : membros) {
+            if (m.getNome().equals(key)) {
                 nomeMembro.setText(key);
                 posicaoMembro.setText(m.getPosicao());
                 dataMembro.setText(df.format(m.getDataAdimissao().getTime()));
                 timesMembro.setText(m.getTime().getNome());
+                btnEditarMembro.setDisable(false);
                 return;
             }
         }
     }
+
     @Override
     public void fillInfo(String key) {
         timesMembro.setText(key);
