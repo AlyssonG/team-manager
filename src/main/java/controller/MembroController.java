@@ -21,10 +21,15 @@ import servico.TimeAppService;
 import util.Util;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Set;
 
 public class MembroController extends GenericController{
+
+    final DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+
     MembroAppService membroService;
     TimeAppService timeService;
 
@@ -158,7 +163,7 @@ public class MembroController extends GenericController{
             if(m.getNome().equals(key)){
                 nomeMembro.setText(key);
                 posicaoMembro.setText(m.getPosicao());
-                dataMembro.setText(m.getDataAdimissao().toString());
+                dataMembro.setText(df.format(m.getDataAdimissao().getTime()));
                 timesMembro.setText(m.getTime().getNome());
                 return;
             }
