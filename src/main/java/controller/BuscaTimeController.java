@@ -85,6 +85,20 @@ public class BuscaTimeController {
         lastController.fillInfo(nomeTime);
     }
 
+    @FXML
+    void fillWhenType() {
+        addTimes(time.getText());
+    }
+
+    private void addTimes(String like) {
+        tableTime.getItems().clear();
+        Set<Time> times = timeService.recuperaTimesEMembros();
+        for (Time t : times) {
+            if (t.getNome().contains(like))
+                tableTime.getItems().add(new TimeRow(t.getNome(), t.getLiga()));
+        }
+    }
+
     public class TimeRow {
         private final SimpleStringProperty nome, liga;
 

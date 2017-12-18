@@ -5,11 +5,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="234.0" prefWidth="548.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BuscaTimeController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="234.0" prefWidth="548.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BuscaTimeController">
     <children>
         <Label layoutX="234.0" layoutY="26.0" text="Buscar Time" />
         <Label layoutX="14.0" layoutY="68.0" text="Digite o time:" />
-        <TextField fx:id="time" layoutX="113.0" layoutY="63.0" prefHeight="26.0" prefWidth="404.0" />
+        <TextField fx:id="time" layoutX="113.0" layoutY="63.0" onKeyReleased="#fillWhenType" prefHeight="26.0" prefWidth="404.0" />
         <TableView fx:id="tableTime" layoutX="63.0" layoutY="100.0" prefHeight="135.0" prefWidth="423.0" />
     </children>
 </AnchorPane>
