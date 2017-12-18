@@ -5,7 +5,6 @@ import dao.MembroDAO;
 import dao.TimeDAO;
 import excecao.*;
 import modelo.Membro;
-import modelo.Time;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -23,11 +22,19 @@ public class MembroAppService {
         this.membroDAO = membroDAO;
     }
 
-    @RoleAdmin
     @Transactional
     public long inclui(Membro umMembro) throws TimeNaoEncontradoException, MembroJaExistenteException {
         Membro membro = membroDAO.inclui(umMembro);
         return membro.getId();
+    }
+
+    @Transactional
+    public void altera(Membro umMembro){
+        try {
+            membroDAO.altera(umMembro);
+        } catch (ObjetoNaoEncontradoException e) {
+            System.out.println("Membro não encontrado");
+        }
     }
 
     @Transactional
